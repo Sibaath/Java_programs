@@ -32,7 +32,7 @@ public class leetcode_125 {
             else 
             continue;
         }
-        if(Character.toLowerCase(ch_left)==Character.toLowerCase(ch_right))
+        if(Character.toLowerCase(s.charAt(right))==Character.toLowerCase(s.charAt(left)))
         return true;
         else
         return false;
