@@ -9,6 +9,10 @@ public class arraylist {
         list.add("B");
         list.add("c");
         list.add("d");
-        System.out.println(""+list.remove(3)+":"+list);
+        list.remove(list.indexOf("c"));
+        int[] arr = {1,2,3,4};
+        System.out.println(arr.toString());
+        System.out.println(list);
+      //  System.out.println(""+list.remove(3)+":"+list);
     }
 }
