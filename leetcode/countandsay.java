@@ -5,12 +5,11 @@ public class countandsay {
         String res = "1";
         for(int i = 0 ;i<n-1;i++)
         {
-            int count = 1;
             String val = "";
             for(int j = 0;j<res.length();j++)
             {
                 char ch = res.charAt(j);
-                int k = j+1,flag=0;
+                int k = j+1,flag=0,count = 1;
                 while(k<res.length() && res.charAt(j)==res.charAt(k))
                 {
                     count++;
@@ -18,7 +17,7 @@ public class countandsay {
                     flag = 1;
                 }
                 if(flag==1)
-                j=k;
+                j=k-1;
                 val += Integer.toString(count)+ch;
             }
             res = val;
