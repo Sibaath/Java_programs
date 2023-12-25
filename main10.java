@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 import java.net.*;
-import java.awt.*;
 public class main10{
     public static void main(String[] args) {
         System.out.println("Server is Started!\nServer is Waiting for a client\n");
@@ -25,10 +24,13 @@ public class main10{
                 Scanner scan =new Scanner(System.in);
                 String str=scan.nextLine();
                 output.writeObject(str);
+                scan.close();
             }while(!message.equals("over"));
             connection.close();
             output.close();
             input.close();
+            server.close();
+            
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

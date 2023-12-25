@@ -1,3 +1,4 @@
+package leetcode;
 class max_water {
     public static int maxArea(int[] height) {
         if(height.length == 2)

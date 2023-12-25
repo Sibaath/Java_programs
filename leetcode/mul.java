@@ -1,3 +1,4 @@
+package leetcode;
 public class mul {
     public static String multiply(String num1, String num2) {
         int a = num1.length()-1;

@@ -1,4 +1,4 @@
-package prg_java;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,7 +32,7 @@ public class agg
         list2.add(obj5);
         list2.add(obj6);
 
-        Library obj7 = new Library(list2);
+      //  Library obj7 = new Library(list2);
 
     }
 }

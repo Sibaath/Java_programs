@@ -1,11 +1,11 @@
 import java.io.IOException;
-import java.io.ObjectInput;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Inet4Address;
+
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
+
 import java.util.Scanner;
 
 public class main11 {
@@ -33,10 +33,12 @@ public class main11 {
             clientConnection.close();
             output.close();
             input.close();
+            scan.close();
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } 
+        
         
     }
 

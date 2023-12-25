@@ -39,6 +39,7 @@ public static void main(String[] args) {
     });
     producer.start();
     consumer.start();
+    sc.close();
 }
 
 }
@@ -67,6 +68,7 @@ class shared_buffer
         int item = buff[empty];
         empty = (empty+1)%size;
         count--;
+        System.out.println(item);
 
         System.out.println("Producer consume : "+count+Thread.currentThread().getName());
 

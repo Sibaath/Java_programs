@@ -12,7 +12,9 @@ public class palin {
 System.out.println("true");
     else
 System.out.println("False");
+ sc.close();
     }
+   
    }
     
 }

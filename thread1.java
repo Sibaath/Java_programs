@@ -25,4 +25,10 @@ public class thread1 implements Runnable{
       Thread obj1 = new Thread(obj2);
       obj1.start();
     }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'run'");
+    }
 }

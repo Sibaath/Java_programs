@@ -18,7 +18,7 @@ class Solution {
         return nums.length-count;
     }
     public static void main(String[] args) {
-        int[] a = {1,1,2,2,3,3,4,5};
+     //   int[] a = {1,1,2,2,3,3,4,5};
     }
     
 }

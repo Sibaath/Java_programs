@@ -1,8 +1,7 @@
 package leetcode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 
 public class valid_mountain {
     public static boolean mountain(int[] arr)

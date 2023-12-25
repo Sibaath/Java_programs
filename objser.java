@@ -46,7 +46,7 @@
 //         this.salary = salary;
 //     }
 // }
-package prg_java;
+
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

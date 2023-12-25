@@ -1,3 +1,4 @@
+package leetcode;
 public class ref {
     public static void main(String[] args) {
         // int[] arr = new int[5];

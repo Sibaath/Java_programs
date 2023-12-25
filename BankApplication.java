@@ -1,4 +1,4 @@
-package prg_java;
+
 class BankAccount {
     private double balance;
 

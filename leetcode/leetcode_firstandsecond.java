@@ -1,3 +1,4 @@
+package leetcode;
 public class leetcode_firstandsecond {
 
         public static int[] searchRange(int[] nums, int target) {
