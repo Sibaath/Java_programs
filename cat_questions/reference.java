@@ -9,7 +9,7 @@ public class reference {
     }
     public static void change(int i[])
     {
-        int[] j ={2};
-        i[0] =2;
+        // int[] j ={2};
+        // i[0] =2;
     }
 }
