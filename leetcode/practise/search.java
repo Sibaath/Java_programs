@@ -1,7 +1,8 @@
 package leetcode.practise;
 import java.util.*;
 import java.io.*;
-import org.jfree
+import org.jfree.chart.chartFactory;
+
 public class search {
     static int count1 = 0,count2 = 0;
     public static boolean linear_search(List<Integer> list , int target)
