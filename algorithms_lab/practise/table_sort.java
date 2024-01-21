@@ -1,4 +1,4 @@
-package leetcode.practise;
+package algorithms_lab.practise;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

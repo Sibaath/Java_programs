@@ -1,7 +1,5 @@
-package leetcode.practise;
+package algorithms_lab.practise;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -9,27 +7,21 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
-public class graph_search
+
+public class table_search
 {
     static int count1,count2;
     static float linear_avg,binary_avg;
 
-    public static void Binary_Search(ArrayList<Integer> list, int target)
+    public static boolean Binary_Search(ArrayList<Integer> list,int target)
     {
         int left = 0 , right = list.size()-1;
         while(left<=right)
         {
             int mid = (left+right)/2;
             if(list.get(mid)==target)
-                return;
+            return true;
             else if(list.get(mid)<target)
             {
                 count2++;
@@ -41,6 +33,7 @@ public class graph_search
                 right = mid-1;
             }
         }
+        return false;
     }
 
     public static boolean linear_search(ArrayList<Integer> list , int target)
@@ -48,13 +41,13 @@ public class graph_search
         for(int i = 0 ; i<list.size() ; i++)
         {
             if(list.get(i)==target)
-                return true;
+            return true;
             else
-                count1++;
+            count1++;
         }
         return false;
     }
-
+  
     public static void create_arr_and_execute(int index,int count_arr1[],int count_arr2[],boolean[] status,int n)
     {
         try
@@ -71,10 +64,11 @@ public class graph_search
             }
             DataInputStream ip = new DataInputStream(new FileInputStream("input.txt"));
             for(int i = 0 ; i<n ;i++)
-                list.add(ip.readInt());
-            status[index] = linear_search(list,rc.nextInt(100));
+            list.add(ip.readInt());
+            int target = rc.nextInt(n);
+            status[index] = linear_search(list,target);
             Collections.sort(list);
-            Binary_Search(list, rc.nextInt(n));
+            Binary_Search(list, target);
             linear_avg+=count1;
             binary_avg+=count2;
             count_arr1[index] = count1;
@@ -96,15 +90,15 @@ public class graph_search
             for(int j = 0; j<5 ; j++)
             {
                 if(j!=0)
-                    System.out.printf("     %7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
+                System.out.printf("     %7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
                 else
                 {
                     if(i==0||i==1)
-                        System.out.printf("  %7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
+                    System.out.printf("  %7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
                     else if(i==2)
-                        System.out.printf(" %7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
+                    System.out.printf(" %7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
                     else if(i==3)
-                        System.out.printf("%7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
+                    System.out.printf("%7d%10d%10d%10s\n",j+1,linear_count[(5*i)+j],binary_count[(5*i)+j],status[(5*i)+j]);
                 }
             }
             System.out.println();
@@ -114,13 +108,17 @@ public class graph_search
             System.out.println();
         }
     }
-    public static void main(String[] args)
+    public static void draw_graph()
     {
-        ArrayList<Integer> list1 = new ArrayList<>();
-        list1.add(100);
-        list1.add(500);
-        list1.add(1000);
-        list1.add(10000);
+        
+    }
+    public static void main(String[] args) 
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(100);
+        list.add(500);
+        list.add(1000);
+        list.add(10000);
         int[] count_arr_linear  = new int[20];
         int[] count_arr_binary  = new int[20];
         float[] avg_linear      = new float[4];
@@ -138,48 +136,11 @@ public class graph_search
                 linear_avg   = 0.0f;
                 binary_avg = 0.0f;
             }
-            create_arr_and_execute(i,count_arr_linear,count_arr_binary,status,list1.get(n));
+            create_arr_and_execute(i,count_arr_linear,count_arr_binary,status,list.get(n));
         }
         avg_linear[3] = linear_avg/5;
         avg_binary[3]  = binary_avg/5;
-        create_table(list1,count_arr_linear,count_arr_binary,status,avg_linear,avg_binary);
-        SwingUtilities.invokeLater(() -> new Search_Performance_Graph("Search Algorithm Performance", list1, avg_linear, avg_binary).setVisible(true));
-    }
-}
-class Search_Performance_Graph extends JFrame {
-
-    public Search_Performance_Graph(String title,ArrayList<Integer> list,float[] avgLinear, float[] avgBinary) {
-        super(title);
-
-        XYSeries linearSeries = new XYSeries("Linear Search");
-        XYSeries binarySeries = new XYSeries("Binary Search");
-
-        for (int i = 0; i < list.size(); i++) {
-            linearSeries.add((double) list.get(i), avgLinear[i]);
-            binarySeries.add((double) list.get(i), avgBinary[i]);
-        }
-
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(linearSeries);
-        dataset.addSeries(binarySeries);
-
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                "Search Algorithm Performance",
-                "Array Size",
-                "Average Count",
-                dataset
-        );
-
-        XYPlot plot = chart.getXYPlot();
-        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, true);
-        plot.setRenderer(renderer);
-
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(800, 600));
-        setContentPane(chartPanel);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
+        create_table(list,count_arr_linear,count_arr_binary,status,avg_linear,avg_binary);   
+        draw_graph();
     }
 }

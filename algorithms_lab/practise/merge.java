@@ -1,3 +1,4 @@
+package algorithms_lab.practise;
 import java.util.Scanner;
 
 public class merge

@@ -1,4 +1,4 @@
-package leetcode.practise;
+package algorithms_lab.practise;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
