@@ -1,16 +1,5 @@
-package algorithms_lab.practise;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.LogarithmicAxis;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
+package algorithms_lab.practise.searching_and_sorting;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -18,7 +7,10 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class graph_sort
+import javax.swing.JFrame;
+import java.awt.*;
+
+public class table_sort
 {
     static int count1,count2;
     static float ins_avg,merge_avg;
@@ -30,31 +22,31 @@ public class graph_sort
     }
     public static void insertion_sort(int[] arr)
     {
-        for(int i = 1; i<arr.length;i++)
-        {
-            int insert = i ;
-            int j = i-1;
-            while(j>=0)
+            for(int i = 1; i<arr.length;i++)
             {
-                if(arr[i]<arr[j])
+                int insert = i ;
+                int j = i-1;
+                while(j>=0)
                 {
-                    swap(arr,i,j);
-                    i--;
-                    count1++;
+                    if(arr[i]<arr[j])
+                    {
+                        swap(arr,i,j);
+                        i--;
+                        count1++;
+                    }
+                    j--;
                 }
-                j--;
+                i = insert;
             }
-            i = insert;
-        }
     }
     public static void merge(int[] arr,int l,int r)
     {
         if(r>l)
         {
-            int mid = (l+r)/2;
-            merge(arr,l,mid);
-            merge(arr,mid+1,r);
-            merge_sort(arr,l,r,mid);
+                int mid = (l+r)/2;
+                merge(arr,l,mid);
+                merge(arr,mid+1,r);
+                merge_sort(arr,l,r,mid);
         }
     }
 
@@ -82,8 +74,8 @@ public class graph_sort
         while(i<n1)
             arr[k++] = arr1[i++];
         while(j<n2)
-            arr[k++] = arr2[j++];
-    }
+           arr[k++] = arr2[j++];
+    }    
     public static void create_arr_and_execute(int index,int count_arr1[],int count_arr2[],int n)
     {
         try
@@ -128,15 +120,15 @@ public class graph_sort
             for(int j = 0; j<5 ; j++)
             {
                 if(j!=0)
-                    System.out.printf("     %10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
+                System.out.printf("     %10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
                 else
                 {
                     if(i==0||i==1)
-                        System.out.printf("  %10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
+                    System.out.printf("  %10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
                     else if(i==2)
-                        System.out.printf(" %10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
+                    System.out.printf(" %10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
                     else if(i==3)
-                        System.out.printf("%10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
+                    System.out.printf("%10d%10d%10d\n",j+1,ins_count[(5*i)+j],merge_count[(5*i)+j]);
                 }
             }
             System.out.println();
@@ -146,7 +138,7 @@ public class graph_sort
             System.out.println();
         }
     }
-    public static void main(String[] args)
+    public static void main(String[] args) 
     {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(100);
@@ -173,38 +165,33 @@ public class graph_sort
         }
         avg_insert[3] = ins_avg/5;
         avg_merge[3]  = merge_avg/5;
-        create_table(list,count_arr_ins,count_arr_merge,avg_insert,avg_merge);
-        SwingUtilities.invokeLater(() -> new Sort_Performance_Graph("Sort Algorithm Performance",list, avg_insert, avg_merge).setVisible(true));
+        // for(int i = 0 ; i < 20 ; i++)
+        // {
+        //     System.out.println("Insertion sort : "+count_arr_ins[i]);
+        //     System.out.println("Merge sort     : "+count_arr_merge[i]);
+        // }
+        // for(int i = 0 ; i<4 ;i++)
+        // {
+        //     System.out.println("Insertion_sort : "+avg_insert[i]);
+        //     System.out.println("Merge sort     : "+avg_merge[i]);
+        // }   
+        create_table(list,count_arr_ins,count_arr_merge,avg_insert,avg_merge);  
     }
 }
-class Sort_Performance_Graph extends JFrame {
-    public Sort_Performance_Graph(String title, ArrayList<Integer> list, float[] avgInsert, float[] avgMerge) {
-        super(title);
-        XYSeries insertSeries = new XYSeries("Insertion Sort");
-        XYSeries mergeSeries = new XYSeries("Merge Sort");
-        for (int i = 0; i < list.size(); i++) {
-            insertSeries.add((double) list.get(i), avgInsert[i]);
-            mergeSeries.add((double) list.get(i), avgMerge[i]);
-        }
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(insertSeries);
-        dataset.addSeries(mergeSeries);
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                "Sort Algorithm Performance",
-                "Array Size",
-                "Average Count",
-                dataset
-        );
-        XYPlot plot = chart.getXYPlot();
-        LogarithmicAxis yAxis = new LogarithmicAxis("Average Count");
-        plot.setRangeAxis(yAxis);
-        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, true);
-        plot.setRenderer(renderer);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(800, 600));
-        setContentPane(chartPanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-    }
-}
+// class Sort_graph extends JFrame
+// {
+//     public Sort_graph(int[] arr1,int[] arr2)
+//     {
+//         setTitle("Graph for Insertion sort");
+//         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//         setLocationRelativeTo(null);
+//     }
+//     public void main(Graphics g)
+//     {
+//         super.paint(g);
+//         Graphics2D g2d = (Graphics2D)g;
+//         g2d.setColor(Color.BLUE);
+
+
+//     }
+// }

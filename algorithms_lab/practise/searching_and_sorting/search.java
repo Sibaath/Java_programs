@@ -1,4 +1,4 @@
-package algorithms_lab.practise;
+package algorithms_lab.practise.searching_and_sorting;
 import java.util.*;
 import java.io.*;
 import org.jfree.chart.chartFactory;

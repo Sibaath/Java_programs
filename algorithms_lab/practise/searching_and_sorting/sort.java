@@ -1,4 +1,4 @@
-package algorithms_lab.practise;
+package algorithms_lab.practise.searching_and_sorting;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package algorithms_lab.practise;
+package algorithms_lab.practise.searching_and_sorting;
 
 import javax.swing.*;
 import java.awt.*;
