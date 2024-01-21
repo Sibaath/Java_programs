@@ -24,7 +24,7 @@ public class adjacency_list {
         int edges = sc.nextInt();
         for(int i = 0 ;i<edges;i++)
         {
-            System.out.print("Enter the souce vertex for edge "+(i+1)+" : ");
+            System.out.print("Enter the source vertex for edge "+(i+1)+" : ");
             int source = sc.nextInt();
             System.out.print("Enter the Destination vertex for edge "+(i+1)+" : ");
             int destination = sc.nextInt();
