@@ -1,3 +1,4 @@
+package semIII_java;
 public class hi {
     public static void main(String[] args) {
         // var a = Sibaath;

@@ -1,15 +1,20 @@
+package semIII_java;
 // import java.io.ObjectInputStream;
 // import java.io.ObjectOutputStream;
+// import java.net.ServerSocket;
 // import java.net.Socket;
 // import java.util.Scanner;
 
-// public class chat_client {
+// public class chat_server {
 //     public static void main(String[] args) {
-//         try{
-//             Socket client = new Socket("127.0.0.1",12345);
+//         System.out.println("Server ready to connect !!");
+//         try
+//         {
+//             ServerSocket server     = new ServerSocket(12345);
+//             Socket connection       = server.accept();
 //             Scanner sc = new Scanner(System.in);
-//             ObjectInputStream inp   = new ObjectInputStream(client.getInputStream());
-//             ObjectOutputStream outp = new ObjectOutputStream(client.getOutputStream());
+//             ObjectInputStream inp   = new ObjectInputStream(connection.getInputStream());
+//             ObjectOutputStream outp = new ObjectOutputStream(connection.getOutputStream());
 //             String msg_sent,msg_recieved;
 //             while(true)
 //             {
@@ -21,7 +26,8 @@
 //                     sc.close();
 //                     inp.close();
 //                     outp.close();
-//                     client.close();
+//                     server.close();
+//                     connection.close();
 //                     System.exit(0);
 //                 }
 //                 else
@@ -29,32 +35,33 @@
 //                     outp.writeObject(msg_sent);
 //                 }
 //                 msg_recieved = (String)inp.readObject();
-//                 System.out.println("Server : "+msg_recieved);
+//                 System.out.println("Client : "+msg_recieved);
 //             }
 //         }
 //         catch(Exception e)
 //         {
-//             System.out.println(e);
+//                 System.out.println(e);
 //         }
 //     }
 // }
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class chat_client {
+public class chat_server {
     public static void main(String[] args) {
+        System.out.println("Server ready to connect!!");
         try {
-            Socket client = new Socket("127.0.0.1", 12345);
+            ServerSocket server = new ServerSocket(12345);
+            Socket connection = server.accept();
             Scanner sc = new Scanner(System.in);
-            ObjectOutputStream outp = new ObjectOutputStream(client.getOutputStream());
-            ObjectInputStream inp = new ObjectInputStream(client.getInputStream());
+            ObjectOutputStream outp = new ObjectOutputStream(connection.getOutputStream());
+            ObjectInputStream inp = new ObjectInputStream(connection.getInputStream());
 
             String msgSent, msgReceived;
             while (true) {
-                msgReceived = (String) inp.readObject();
-                System.out.println("Server: " + msgReceived);
                 System.out.print("You: ");
                 msgSent = sc.nextLine();
 
@@ -63,15 +70,19 @@ public class chat_client {
                     sc.close();
                     outp.close();
                     inp.close();
-                    client.close();
+                    server.close();
+                    connection.close();
                     System.exit(0);
                 } else {
                     outp.writeObject(msgSent);
                 }
 
+                msgReceived = (String) inp.readObject();
+                System.out.println("Client: " + msgReceived);
             }
         } catch (Exception e) {
-            System.out.println("Chat Closed");
+            System.out.println(e);
         }
     }
 }
+

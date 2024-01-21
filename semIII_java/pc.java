@@ -1,3 +1,4 @@
+package semIII_java;
 import java.util.Scanner;
 
 public class pc{

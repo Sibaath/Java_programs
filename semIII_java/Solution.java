@@ -1,3 +1,4 @@
+package semIII_java;
 class Solution {
     public int removeDuplicates(int[] nums) {
         int  j =0,count=0;

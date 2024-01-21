@@ -1,3 +1,4 @@
+package semIII_java;
 public class thread1 implements Runnable{
     public static void main(String[] args) {
         Thread obj = new Thread(new Runnable() {

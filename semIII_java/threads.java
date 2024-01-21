@@ -1,3 +1,4 @@
+package semIII_java;
 public class threads{
     public static void main(String[] args) {
         conurrency t1 = new conurrency();

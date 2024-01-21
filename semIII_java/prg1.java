@@ -1,3 +1,4 @@
+package semIII_java;
 public class prg1 {
     
 }

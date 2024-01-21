@@ -1,3 +1,4 @@
+package semIII_java;
 public class cast {
    public static void main(String[] args) {
     Animal obj = new Dog();
