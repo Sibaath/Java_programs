@@ -1,15 +1,11 @@
-package algorithms_lab.graphs;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class dfs {
     static int time = 0;
-    public static void make_edge(ArrayList<ArrayList<Node>> vertex_list,HashMap<Integer,Node> all_vertices,int src,int destination,int type)
+    public static void make_edge(ArrayList<ArrayList<Node>> vertex_list,HashMap<Integer,Node> all_vertices,int src,int destination)
     {
-        if(type==1)
-            vertex_list.get(destination-1).add(all_vertices.get(src));
         vertex_list.get(src-1).add(all_vertices.get(destination));
     }
     public static void depth_first_search(Node sourceNode,ArrayList<ArrayList<Node>> adjArrayList)
@@ -32,8 +28,6 @@ public class dfs {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the type of graph [Directed/undirected](0/1) : ");
-        int type = sc.nextInt();
         System.out.print("Enter the number of vertices : ");
         int vertices = sc.nextInt();
         HashMap<Integer,Node> all_vertices = new HashMap<>();
@@ -41,6 +35,7 @@ public class dfs {
         for(int i = 0;i<vertices;i++)
         {
             adjacency_list.add(new ArrayList<>());
+            edge_list.add(new ArrayList<>());
             Node node = new Node(i+1,Integer.MAX_VALUE,Integer.MAX_VALUE,Integer.MAX_VALUE,'w');
             all_vertices.put(i+1,node);
         }
@@ -52,14 +47,15 @@ public class dfs {
             int src = sc.nextInt();
             System.out.print("Enter the Destination vertex for edge "+(i+1)+" : ");
             int destination = sc.nextInt();
-            make_edge(adjacency_list,all_vertices, src, destination,type);
+            edge_list.get(src-1).add(0);
+            make_edge(adjacency_list,all_vertices, src, destination);
         }
         for(int i =0;i<all_vertices.size();i++)
         {
             Node node = all_vertices.get(i+1);
             if(node.color=='w')
             {
-                depth_first_search(node, adjacency_list);
+                depth_first_search(node, adjacency_list,edge_list);
                 System.out.println();
             }
         }

@@ -3,15 +3,11 @@ package algorithms_lab.graphs;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class adjacency_list {
-    public static void make_edge(ArrayList<ArrayList<Integer>> vertex_list,int source,int destination,int type)
-    {
-        if(type==1)
-            vertex_list.get(destination-1).add(source);
-        vertex_list.get(source-1).add(destination);
+public class adjacency_list
+{
 
-    }
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the type of graph [Directed/undirected](0/1) : ");
         int type = sc.nextInt();
